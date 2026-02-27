@@ -1066,10 +1066,7 @@ footer{
     <div style="font-size:13px;color:var(--muted);margin-bottom:8px;">예금주 확인 후 결제해 주세요</div>
     <div style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px;">강동호 · 49,000원</div>
     <div style="background:#c0392b;color:#fff;padding:14px 16px;margin:24px 0 16px;font-size:13px;font-weight:700;line-height:1.7;text-align:center;">⚠️ 결제 완료 후 반드시 아래 버튼을 눌러<br>카카오톡으로 입금 확인 요청해 주세요</div>
-    <div id="kakao-chat-pc" data-channel-public-id="_CdxbqX" data-title="consult" data-size="small" data-color="yellow" data-shape="pc" data-support-multiple-densities="true" style="display:inline-block;"></div>
-    <div style="margin-top:12px;">
-      <a href="https://pf.kakao.com/_CdxbqX/chat" target="_blank" style="font-size:11px;color:var(--muted);text-decoration:underline;">버튼이 안 보이면 여기를 눌러주세요</a>
-    </div>
+    <a href="https://pf.kakao.com/_CdxbqX/chat" target="_blank" style="display:block;background:#FEE500;color:#1a1a1a;padding:14px;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;">💬 카카오톡으로 입금 확인 요청</a>
   </div>
 </div>
 
@@ -1089,10 +1086,7 @@ footer{
     <div style="width:100%;height:1px;background:var(--rule);margin:20px 0;"></div>
 
     <div style="background:#c0392b;color:#fff;padding:14px 16px;margin:4px 0 14px;font-size:13px;font-weight:700;line-height:1.7;text-align:center;">⚠️ 결제 완료 후 반드시 아래 버튼을 눌러<br>카카오톡으로 입금 확인 요청해 주세요</div>
-    <div id="kakao-chat-mobile" data-channel-public-id="_CdxbqX" data-title="consult" data-size="small" data-color="yellow" data-shape="mobile" data-support-multiple-densities="true" style="display:inline-block;"></div>
-    <div style="margin-top:10px;">
-      <a href="https://pf.kakao.com/_CdxbqX/chat" target="_blank" style="font-size:11px;color:var(--muted);text-decoration:underline;">버튼이 안 보이면 여기를 눌러주세요</a>
-    </div>
+    <a href="https://pf.kakao.com/_CdxbqX/chat" target="_blank" style="display:block;background:#FEE500;color:#1a1a1a;padding:14px;font-size:13px;font-weight:700;border-radius:4px;text-decoration:none;">💬 카카오톡으로 입금 확인 요청</a>
   </div>
 </div>
 
@@ -1204,23 +1198,6 @@ const obs = new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 
-<!-- Kakao Channel Chat SDK -->
-<script>
-  window.kakaoAsyncInit = function() {
-    // PC modal button
-    Kakao.Channel.createChatButton({ container: '#kakao-chat-pc' });
-    // Mobile modal button
-    Kakao.Channel.createChatButton({ container: '#kakao-chat-mobile' });
-  };
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.channel.min.js';
-    js.integrity = 'sha384-8oNFBbAHWVovcMLgR+mLbxqwoucixezSAzniBcjnEoumhfIbMIg4DrVsoiPEtlnt';
-    js.crossOrigin = 'anonymous';
-    fjs.parentNode.insertBefore(js, fjs);
-  })(document, 'script', 'kakao-js-sdk');
-</script>
+
 </body>
 </html>
