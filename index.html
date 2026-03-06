@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-571NW750YZ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -46,27 +45,6 @@ em{font-style:normal;}
 .serif{font-family:'Cormorant Garamond',serif;}
 .serif-kr{font-family:'Noto Serif KR',serif;}
 
-/* gold rule drop animation */
-.hero-rule-drop{
-  width:1px;height:0;
-  background:linear-gradient(to bottom,var(--gold),transparent);
-  margin:0 auto;opacity:.6;
-  animation:heroRuleDrop 1.2s .3s ease forwards;
-}
-@keyframes heroRuleDrop{
-  from{height:0;opacity:.6;}
-  to{height:60px;opacity:.5;}
-}
-
-/* scanline */
-.hero-scanline{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-.hero-scanline::after{
-  content:'';position:absolute;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(184,150,74,0.35),transparent);
-  animation:scanline 7s linear infinite;top:0;
-}
-@keyframes scanline{0%{transform:translateY(-100%);}100%{transform:translateY(100vh);}}
-
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
 
@@ -110,73 +88,6 @@ nav{
 }
 .nav-cta:hover{background:#333;}
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;text-align:center;
-  padding:140px 32px 100px;
-  background:var(--ink);
-  position:relative;overflow:hidden;
-}
-.hero-texture{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 100% 70% at 50% -10%,rgba(184,150,74,0.08) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 10% 110%,rgba(184,150,74,0.04) 0%,transparent 50%);
-}
-.hero-content{position:relative;z-index:2;max-width:840px;}
-
-.hero-eyebrow{
-  display:flex;align-items:center;justify-content:center;
-  gap:16px;
-  font-size:9px;letter-spacing:4px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:48px;
-  animation:fadeIn 1s ease both;
-}
-.hero-eyebrow span{
-  width:40px;height:1px;background:var(--gold);opacity:0.4;
-}
-
-.hero-h1{
-  font-family:'Noto Serif KR',serif;
-  font-size:clamp(26px,4.5vw,52px);
-  font-weight:700;line-height:1.45;
-  color:#f0ece4;margin-bottom:20px;
-  word-break:keep-all;
-  animation:fadeUp .9s .1s ease both;
-}
-.hero-h1 em{
-  font-style:normal;
-  color:var(--gold2);
-}
-
-.hero-rule{
-  width:1px;height:56px;
-  background:linear-gradient(to bottom,var(--gold),transparent);
-  margin:36px auto;opacity:.5;
-  animation:fadeIn 1s .4s ease both;
-}
-
-.hero-sub{
-  font-size:19px;
-  color:rgba(240,236,228,0.9);
-  max-width:580px;margin:0 auto 16px;
-  line-height:1.9;word-break:keep-all;
-  animation:fadeUp .9s .25s ease both;
-}
-.hero-sub strong{color:#f0ece4;}
-
-.hero-cta{
-  display:inline-block;margin-top:44px;
-  background:var(--gold);color:var(--ink);
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:12px;font-weight:500;letter-spacing:2px;
-  padding:16px 44px;text-transform:uppercase;
-  text-decoration:none;transition:background .2s,transform .15s;
-  animation:fadeUp .9s .4s ease both;
-}
-.hero-cta:hover{background:var(--gold2);transform:translateY(-2px);}
-
 /* ── SECTION BASE ── */
 .sec{padding:100px 32px;}
 .sec-inner{max-width:900px;margin:0 auto;}
@@ -207,337 +118,6 @@ nav{
 }
 
 hr.rule{border:none;border-top:1px solid var(--rule);margin:0;}
-
-/* ── PHILOSOPHY ── */
-.phil-sec{background:var(--paper2);}
-.phil-quote{
-  font-family:'Noto Serif KR',serif;
-  font-size:clamp(16px,2.2vw,20px);
-  font-weight:500;line-height:2;
-  color:var(--ink);margin-bottom:52px;
-  word-break:keep-all;
-}
-.phil-quote strong{color:var(--gold);font-weight:600;}
-
-.blockquote-box{
-  border-left:2px solid var(--gold);
-  padding:28px 36px;
-  background:var(--paper);
-  margin-top:8px;
-}
-.blockquote-box .bq-h{
-  font-family:'Noto Serif KR',serif;
-  font-size:clamp(15px,2vw,19px);
-  font-weight:600;line-height:1.65;
-  color:var(--ink);margin-bottom:12px;word-break:keep-all;
-}
-.blockquote-box .bq-p{
-  font-size:15px;color:var(--muted);
-  line-height:1.9;word-break:keep-all;font-weight:500;
-}
-.blockquote-box .bq-p strong{color:var(--gold);font-weight:700;}
-
-/* ── PSAGI SECTION ── */
-.psagi-sec{background:var(--ink);}
-.psagi-sec .sec-label{color:rgba(184,150,74,0.7);}
-.psagi-sec .sec-label::after{background:rgba(184,150,74,0.4);}
-.psagi-sec .sec-h2{color:#f0ece4;}
-.psagi-sec .sec-h2 em{color:var(--gold2);}
-.psagi-sec .sec-body{color:rgba(240,236,228,0.55);}
-
-.psagi-grid{
-  display:grid;grid-template-columns:1fr 1px 1fr;
-  gap:0;margin-top:60px;
-}
-.psagi-divider{background:rgba(255,255,255,0.06);}
-.psagi-col{padding:0 48px;}
-.psagi-col:first-child{padding-left:0;}
-.psagi-col:last-child{padding-right:0;}
-
-.psagi-col-label{
-  font-size:14px;letter-spacing:3px;text-transform:uppercase;
-  margin-bottom:28px;display:flex;align-items:center;gap:8px;
-}
-.psagi-col.problem .psagi-col-label{color:#c0392b;}
-.psagi-col.solution .psagi-col-label{color:var(--gold);}
-
-.psagi-dot{width:5px;height:5px;border-radius:50%;}
-.psagi-col.problem .psagi-dot{background:#c0392b;}
-.psagi-col.solution .psagi-dot{background:var(--gold);}
-
-.psagi-item{
-  padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-  font-size:14px;color:rgba(240,236,228,0.6);
-  line-height:1.7;word-break:keep-all;
-  display:flex;gap:12px;align-items:flex-start;
-}
-.psagi-item .i{flex-shrink:0;margin-top:4px;font-size:12px;}
-.psagi-col.problem .i{color:#c0392b;}
-.psagi-col.solution .i{color:var(--gold);}
-.psagi-col.solution .psagi-item{color:rgba(240,236,228,0.85);}
-
-/* ── 지금 바꿀 수 있는 것 ── */
-.change-sec{background:var(--paper);}
-.change-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--rule);margin-top:56px;
-}
-.change-item{
-  background:var(--paper);
-  padding:36px 28px;transition:background .2s;
-}
-.change-item:hover{background:var(--paper2);}
-.change-item.highlight{background:var(--ink);color:#f0ece4;}
-.change-item.highlight:hover{background:#1c1b1a;}
-
-.change-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;font-weight:300;
-  color:var(--gold);opacity:.35;
-  line-height:1;margin-bottom:16px;
-}
-.change-name{
-  font-family:'Noto Serif KR',serif;
-  font-size:16px;font-weight:600;
-  margin-bottom:10px;
-}
-.change-item.highlight .change-name{color:#f0ece4;}
-.change-desc{font-size:13px;color:var(--muted);line-height:1.75;word-break:keep-all;}
-.change-item.highlight .change-desc{color:rgba(240,236,228,0.6);}
-.change-tag{
-  display:inline-block;margin-top:16px;
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  border:1px solid;padding:4px 12px;
-}
-.change-item:not(.highlight) .change-tag{
-  border-color:var(--gold);color:var(--gold);
-}
-.change-item.highlight .change-tag{
-  border-color:var(--gold);color:var(--gold);
-}
-.change-item:not(.highlight):not(.change-item.highlight) .change-tag{
-  opacity:.4;
-}
-
-/* ── 자가진단 체크 ── */
-.check-sec{background:var(--paper2);}
-.check-list{margin-top:48px;}
-.check-item{
-  display:flex;align-items:flex-start;gap:16px;
-  padding:20px 0;border-bottom:1px solid var(--rule);
-  cursor:pointer;
-  transition:background .15s;
-}
-.check-item:first-child{border-top:1px solid var(--rule);}
-.check-box{
-  width:18px;height:18px;
-  border:1px solid var(--light);
-  flex-shrink:0;margin-top:3px;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.check-item.checked .check-box{
-  background:var(--ink);border-color:var(--ink);
-}
-.check-mark{font-size:10px;color:var(--paper);display:none;}
-.check-item.checked .check-mark{display:block;}
-.check-text{font-size:15px;color:var(--ink);line-height:1.7;word-break:keep-all;}
-.check-item.checked .check-text{color:var(--muted);text-decoration:line-through;}
-
-.check-result{
-  margin-top:36px;padding:28px 32px;
-  background:var(--ink);
-  display:none;
-}
-.check-result.show{display:block;}
-.check-result-h{
-  font-family:'Noto Serif KR',serif;
-  font-size:17px;font-weight:600;
-  color:var(--gold2);margin-bottom:10px;
-}
-.check-result-p{font-size:14px;color:rgba(240,236,228,0.65);line-height:1.85;word-break:keep-all;}
-.check-result-cta{
-  display:inline-block;margin-top:20px;
-  background:var(--gold);color:var(--ink);
-  font-size:12px;letter-spacing:2px;text-transform:uppercase;
-  padding:12px 28px;font-weight:500;
-  font-family:'Noto Sans KR',sans-serif;
-  cursor:pointer;border:none;text-decoration:none;
-  transition:background .2s;
-}
-.check-result-cta:hover{background:var(--gold2);}
-
-/* ── 서비스 구성 ── */
-.service-sec{background:var(--paper);}
-.service-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:1px;background:var(--rule);margin-top:56px;
-}
-.service-item{
-  background:var(--paper);padding:32px 28px;
-  transition:background .2s;
-}
-.service-item:hover{background:var(--paper2);}
-.s-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;color:var(--gold);opacity:.25;
-  line-height:1;margin-bottom:14px;
-}
-.s-name{
-  font-family:'Noto Serif KR',serif;
-  font-size:15px;font-weight:600;
-  margin-bottom:8px;color:var(--ink);
-}
-.s-desc{font-size:13px;color:var(--muted);line-height:1.75;word-break:keep-all;}
-.s-tag{
-  display:inline-block;margin-top:14px;
-  font-size:9px;letter-spacing:2px;
-  border:1px solid var(--gold);color:var(--gold);
-  padding:3px 10px;text-transform:uppercase;
-}
-
-/* ── PROCESS ── */
-.process-sec{background:var(--ink);}
-.process-sec .sec-label{color:rgba(184,150,74,0.7);}
-.process-sec .sec-label::after{background:rgba(184,150,74,0.4);}
-.process-sec .sec-h2{color:#f0ece4;}
-.process-sec .sec-body{color:rgba(240,236,228,0.5);}
-
-.process-flow{
-  margin-top:60px;
-  display:flex;flex-direction:column;gap:0;
-}
-.process-step{
-  display:grid;grid-template-columns:80px 1fr;
-  gap:0;position:relative;
-}
-.process-step::before{
-  content:'';
-  position:absolute;left:40px;top:52px;bottom:-1px;
-  width:1px;background:rgba(255,255,255,0.06);
-}
-.process-step:last-child::before{display:none;}
-
-.process-left{
-  padding:32px 0;
-  display:flex;flex-direction:column;align-items:center;
-  gap:0;
-}
-.process-circle{
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(184,150,74,0.4);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Cormorant Garamond',serif;
-  font-size:16px;color:var(--gold);
-  flex-shrink:0;background:var(--ink);
-  position:relative;z-index:1;
-}
-
-.process-right{
-  padding:32px 0 32px 28px;
-  border-bottom:1px solid rgba(255,255,255,0.04);
-}
-.process-step:last-child .process-right{border-bottom:none;}
-.process-title{
-  font-family:'Noto Serif KR',serif;
-  font-size:16px;font-weight:600;
-  color:#f0ece4;margin-bottom:6px;word-break:keep-all;
-}
-.process-desc{
-  font-size:13px;color:rgba(240,236,228,0.5);
-  line-height:1.8;word-break:keep-all;
-}
-.process-note{
-  display:inline-block;margin-top:10px;
-  font-size:10px;letter-spacing:1px;
-  background:var(--gold-t);border:1px solid rgba(184,150,74,0.3);
-  color:var(--gold);padding:4px 12px;
-}
-
-/* ── SAMPLE MOCKUP ── */
-.sample-sec{background:var(--paper2);}
-.sample-note{
-  font-size:12px;color:var(--muted);
-  border-left:2px solid var(--gold);padding-left:14px;
-  margin-top:16px;line-height:1.7;
-}
-.sample-container{
-  margin-top:48px;
-  border:1px solid var(--rule);
-  background:var(--paper);
-  overflow:hidden;
-}
-.sample-top{
-  background:var(--ink);padding:18px 32px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.sample-title-block{display:flex;flex-direction:column;gap:2px;}
-.sample-brand{
-  font-family:'Cormorant Garamond',serif;
-  font-size:14px;letter-spacing:4px;text-transform:uppercase;
-  color:#f0ece4;
-}
-.sample-subtitle{font-size:9px;letter-spacing:2px;color:rgba(184,150,74,0.7);}
-.sample-badge{
-  font-size:9px;letter-spacing:1px;
-  border:1px solid rgba(184,150,74,0.4);
-  color:var(--gold);padding:5px 12px;
-}
-
-.sample-body{
-  display:grid;grid-template-columns:1fr 1px 1fr;
-  min-height:360px;
-}
-.sample-v-rule{background:var(--rule);}
-.sample-panel{padding:32px 28px;}
-
-.sample-panel-label{
-  font-size:8px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:20px;
-  padding-bottom:12px;border-bottom:1px solid var(--rule);
-}
-
-.metric-row{
-  display:flex;justify-content:space-between;
-  align-items:center;padding:10px 0;
-  border-bottom:1px solid var(--rule);
-  font-size:13px;
-}
-.metric-row:last-child{border-bottom:none;}
-.metric-key{color:var(--muted);}
-.metric-val{font-weight:500;}
-.v-ok{color:#2d7a4f;}
-.v-warn{color:#b07d1e;}
-.v-bad{color:#8b2020;}
-
-.roadmap-item{
-  display:grid;grid-template-columns:80px 1fr;
-  gap:12px;align-items:start;
-  padding:12px 0;border-bottom:1px solid var(--rule);
-  font-size:13px;
-}
-.roadmap-item:last-child{border-bottom:none;}
-.rm-period{color:var(--gold);font-size:11px;letter-spacing:1px;}
-.rm-action{color:var(--ink);line-height:1.6;word-break:keep-all;}
-.rm-tag{
-  display:inline-block;margin-top:4px;
-  font-size:9px;letter-spacing:1px;
-  background:var(--gold-t);border:1px solid rgba(184,150,74,0.2);
-  color:var(--gold);padding:2px 8px;
-}
-
-.sample-footer{
-  padding:16px 32px;
-  background:var(--paper2);
-  border-top:1px solid var(--rule);
-  display:flex;justify-content:space-between;align-items:center;
-}
-.sf-text{font-size:11px;color:var(--muted);letter-spacing:1px;}
-.sf-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:20px;color:var(--light);
-}
 
 /* ── PRICING ── */
 .pricing-sec{background:var(--paper);}
@@ -660,37 +240,15 @@ footer{
 .float-kakao:hover{transform:scale(1.08);}
 .float-kakao svg{width:26px;height:26px;}
 
-.float-cta{
-  position:static;
-  background:var(--ink);color:var(--paper);
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:11px;letter-spacing:2px;text-transform:uppercase;
-  padding:14px 22px;cursor:pointer;border:none;
-  box-shadow:0 8px 28px rgba(0,0,0,0.15);
-  transition:background .2s,transform .1s;
-  text-decoration:none;display:block;
-}
-.float-cta:hover{background:#2a2a2a;transform:translateY(-2px);}
-
 /* ── RESPONSIVE ── */
 @media(max-width:780px){nav{padding:10px 16px;}
   .nav-logo{font-size:13px;letter-spacing:3px;}
   .nav-cta{font-size:8px;padding:7px 14px;}
-  .hero-sub{font-size:15px;line-height:1.75;}
   .nav-right .nav-tag{display:none;}
-  .psagi-grid{grid-template-columns:1fr;gap:32px;}
-  .psagi-divider{display:none;}
-  .psagi-col{padding:0;}
-  .change-grid{grid-template-columns:1fr;}
-  .service-grid{grid-template-columns:1fr;}
-  .sample-body{grid-template-columns:1fr;}
-  .sample-v-rule{display:none;}
   footer{flex-direction:column;gap:24px;}
   .footer-right{text-align:left;}
-  .img-slots-grid{grid-template-columns:1fr !important;}
 }
 @media(max-width:480px){
-  .hero{padding:120px 20px 80px;}
   .sec{padding:72px 20px;}
   .pricing-body{padding:32px 24px;}
   .pricing-head{padding:18px 24px;}
@@ -699,11 +257,9 @@ footer{
 </head>
 <body>
 
-<!-- ════════════════════ NAV ════════════════════ -->
 <nav>
   <div class="nav-brand">
     <div class="nav-logo">Men's Total Image Strategy</div>
-    
   </div>
   <div class="nav-right">
     <div class="nav-tag">Beta · 선착순 10명</div>
@@ -711,300 +267,19 @@ footer{
   </div>
 </nav>
 
-
-<!-- ════════════════════ HERO ════════════════════ -->
-<section class="hero">
-  <div class="hero-texture"></div>
-  <div class="hero-scanline"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow"><span></span> Men's Total Image Strategy <span></span></div>
-    <div class="hero-rule-drop"></div>
-<h1 class="hero-h1" style="margin-top:32px;">
-  상대방은 당신에게<br><em>'진짜' 거절 이유</em>를<br>말해주지 않습니다.
-  <br><br>
-  이 리포트가 <em>말해 </em>드립니다.
-</h1>
-<p class="hero-sub" style="font-size:19px;color:rgba(240,236,228,0.9);margin-top:32px;">
-  <br><strong>- 내 사진 단 1장으로 알 수 있는 것 -</strong><br><br>
-  ✅ 무엇을? 내 얼굴에서 <strong>바꿔야 할</strong> 1순위<br>
-  ✅ 얼마나? 추천 시술별 <strong>예상 비용</strong>과 우선순위 로드맵<br>
-  ✅ 어디서? <strong>피부과·헤어샵</strong> 가기 전에 알아야 할 내 얼굴 데이터<br>
-  ✅ 어떻게? 나도 몰랐던 내 외모관리 <strong>성향</strong>(MGPI)과 맞춤 <strong>전략</strong> 순서 까지<br><br><br>
-</p>
-    
+<section style="width: 100%; padding-top: 60px; background: #1a1a1a; text-align: center;">
+  <div style="max-width: 900px; margin: 0 auto; line-height: 0; font-size: 0;">
+    <img src="랜딩페이지NEW_1.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 1">
+    <img src="랜딩페이지NEW_2.png" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 2">
+    <img src="랜딩페이지NEW_3.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 3">
+    <img src="랜딩페이지NEW_4.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 4">
+    <img src="랜딩페이지NEW_5.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 5">
+    <img src="랜딩페이지NEW_6.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 6">
+    <img src="랜딩페이지NEW_7.jpg" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 7">
+    <img src="랜딩페이지NEW_8.png" style="width: 100%; display: block; margin: 0; padding: 0;" alt="상세페이지 8">
   </div>
 </section>
 
-
-<!-- ════════════════════ PHILOSOPHY ════════════════════ -->
-<section class="sec phil-sec">
-  <div class="sec-inner-sm">
-    <div class="sec-label reveal">Philosophy</div>
-    <p class="phil-quote reveal">
-      피부가 깨끗하고 눈썹이 정돈된 남자는<br>
-      '잘생긴 남자'로 보이기 이전에,<br>
-      <strong>'부지런하고 자기 통제가 되는 남자'</strong>로 인식됩니다.<br><br>
-      여성들은 본능적으로 압니다. 주름을 펴고, 거친 피부를 정리하는 과정이<br>
-      얼마나 귀찮은 일인지. 그 귀찮음을 이겨내고 관리했다는 것 자체가,<br>
-      결혼 시장에서는 <strong>성실함의 증거</strong>가 됩니다.
-    </p>
-    <div class="blockquote-box reveal">
-      <div class="bq-h">
-        첫 만남의 3초 — 상대방의 뇌는 이미 결론을 냈습니다.
-      </div>
-      <div class="bq-p">
-        그 짧은 시간에 당신의 지성과 능력을 보여줄 수 없다면, 외모가 그 역할을 대신해야 합니다. 외모 관리는 사치가 아니라, <strong>당신의 내면을 보여주기 위한 '입장권'</strong>입니다.
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-
-<!-- ════════════════════ 프사기 문제 ════════════════════ -->
-<section class="sec psagi-sec">
-  <div class="sec-inner">
-    <div class="sec-label reveal">The Real Problem</div>
-    <h2 class="sec-h2 reveal">
-      지금 당신의<br>경쟁력은 어떻습니까?
-    </h2>
-    <p class="sec-body reveal" style="max-width:560px;margin-top:16px;">
-      선매칭 요청이 거의 없고, 만남이 이루어져도 애프터가 이어지지 않나요? 무엇이 문제인지, 어디서부터 바꿔야 하는지 아무도 알려주지 않습니다.
-    </p>
-
-    <div class="psagi-grid reveal" style="margin-top:60px;">
-      <div class="psagi-col problem">
-        <div class="psagi-col-label"><span class="psagi-dot"></span>지금 일어나고 있는 일</div>
-        <div class="psagi-item"><span class="i">—</span><span>내 프로필이 뿌려지지만 여성의 선매칭 요청이 없다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>매칭이 되어도 미팅 직후 상대방이 애프터를 거절한다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>거절 이유를 듣지 못하거나, 모호한 말만 전달된다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>상대방은 '진짜' 이유를 말해주지 않는다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>보정된 프로필 사진과 실제 모습의 괴리 — '프사기'</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>반복되는 실패로 자존감이 소진된다</span></div>
-      </div>
-      <div class="psagi-divider"></div>
-      <div class="psagi-col solution">
-        <div class="psagi-col-label"><span class="psagi-dot"></span>우리가 해결하는 것</div>
-        <div class="psagi-item"><span class="i">—</span><span>실제 첫 만남에서의 인상을 <strong>객관적 수치</strong>로 분석한다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>상대방이 느끼는 <strong>'불호 요인'</strong>을 구체적으로 찾아낸다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>프로필 사진과 실물의 괴리를 <strong>줄이는 방향</strong>을 제시한다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>당장 바꿀 수 있는 것에 집중한 <strong>우선순위</strong>를 설계한다</span></div>
-        <div class="psagi-item"><span class="i">—</span><span>즉각 개선 · 구조적 복원 · 디테일 보완 <strong>3단계 전략</strong></span></div>
-        <div class="psagi-item"><span class="i">—</span><span>단계별 로드맵으로 <strong>지속 가능한 변화</strong>를 만든다</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<hr class="rule">
-
-
-<!-- ════════════════════ 자가 체크 ════════════════════ -->
-<section class="sec check-sec" id="check">
-  <div class="sec-inner-sm">
-    <div class="sec-label reveal">Self-Check</div>
-    <h2 class="sec-h2 reveal">해당되는 항목에 체크하세요</h2>
-    <p class="sec-body reveal">2개 이상 해당된다면, 지금 외모 경쟁력 진단이 필요합니다.</p>
-
-    <div class="check-list reveal" id="checkList">
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <div class="check-text">결정사 가입 후 여성 회원의 선매칭 요청이 거의 없다</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <div class="check-text">만남이 이루어진 후 애프터가 이어지지 않는 경우가 많다</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <div class="check-text">거절 이유를 정확하게 전달받은 적이 없다</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <div class="check-text">실제 나이보다 들어 보인다거나 피곤해 보인다는 말을 듣는다</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <div class="check-text">외모 관리를 어디서부터 어떻게 해야 할지 모르겠다</div>
-      </div>
-      <div class="check-item" onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <div class="check-text">프로필 사진보다 실물이 낫다는 말, 혹은 그 반대의 상황을 경험했다</div>
-      </div>
-    </div>
-
-    <div class="check-result" id="checkResult">
-      <div class="check-result-h">외모 경쟁력 점검 필요 단계입니다</div>
-      <div class="check-result-p">
-        체크하신 항목들은 공통된 원인을 갖습니다. 얼굴에서 발생하는 '불호 요인' — 피로해 보이는 인상, 정돈되지 않은 세부 요소, 나이보다 들어 보이는 피부 상태 등이 첫 만남의 3초를 결정하고 있습니다. 정밀 분석 리포트를 통해 어떤 부분부터 제거해야 하는지 확인하세요.
-      </div>
-     
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-
-<!-- ════════════════════ 서비스 구성 ════════════════════ -->
-<section class="sec service-sec">
-  <div class="sec-inner">
-    <div class="sec-label reveal">What's Inside</div>
-    <h2 class="sec-h2 reveal">리포트 <em>구성</em> - 총 14P 핵심 구성</h2>
-    <p class="sec-body reveal">사진과 문진 응답으로, 맞춤 분석 리포트를 드립니다.<br>
-<strong>✅ 성향, 비율, 윤곽, 이목구비, 피부, 주름, 눈썹, 헤어, 화장품, 예상 비용, 6개월 로드맵 등 ✅</strong>
-</p>
-
-<div style="margin-top:56px;margin-bottom:12px;font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:500;" class="reveal">— 1차 전달 · 정밀 분석 리포트 —</div>
-    <div class="service-grid reveal">
-      <div class="service-item">
-        <div class="s-num">01</div>
-        <div class="s-name">외모 관리 <strong>성향</strong> 진단 <strong>(MGPI)</strong></div>
-        <div class="s-desc">16가지 페르소나 유형 중 당신의 성향을 분석합니다. 관리 접근 방식과 우선순위 설정의 기준이 됩니다.</div>
-      </div>
-      <div class="service-item">
-        <div class="s-num">02</div>
-        <div class="s-name">얼굴 <strong>비율</strong> 정밀 분석</div>
-        <div class="s-desc">상·중·하안부 비율, 얼굴형, T존 발달도, 눈코입 균형을 측정선과 수치로 분석합니다.</div>
-      </div>
-      <div class="service-item">
-        <div class="s-num">03</div>
-        <div class="s-name"><strong>피부</strong> 상태 분석</div>
-        <div class="s-desc">사진 기반 육안 분석 (트러블·색소·모공·다크서클)과 문진 기반 피부 타입·루틴 피드백을 함께 제공합니다.</div>
-      </div>
-      <div class="service-item">
-        <div class="s-num">04</div>
-        <div class="s-name"><strong>눈썹</strong> 분석 및 추천</div>
-        <div class="s-desc">얼굴형에 맞는 눈썹 디자인을 AI로 합성하여 BEST/WORST를 비교합니다.</div>
-        <div class="s-tag">AI 합성 이미지</div>
-      </div>
-      <div class="service-item" style="grid-column:1/-1;">
-        <div class="s-num">05</div>
-        <div class="s-name"><strong>리스크</strong> 관리 종합</div>
-        <div class="s-desc">전체 항목의 위험 등급을 종합하고, 즉각 개선 / 구조적 복원 / 디테일 보완 3단계 솔루션 방향을 제시합니다.</div>
-      </div>
-    </div>
-
-    <div style="margin-top:40px;margin-bottom:12px;font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:500;" class="reveal">— 2차 전달 · 맞춤 실행 로드맵 — <span style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-left:8px;">피드백 설문 완료 후 제공</span></div>
-    <div class="service-grid reveal">
-      <div class="service-item">
-        <div class="s-num">06</div>
-        <div class="s-name">가상 <strong>시뮬레이션</strong> (Before/After)</div>
-        <div class="s-desc">리스크 제거 시 예상 변화를 AI로 합성하여 미리 확인합니다.</div>
-        <div class="s-tag">AI 합성 이미지</div>
-      </div>
-      <div class="service-item">
-        <div class="s-num">07</div>
-        <div class="s-name">6개월 실행 <strong>로드맵</strong> + <strong>예상 비용</strong></div>
-        <div class="s-desc">즉각 개선 / 구조적 복원 / 디테일 보완 순서로 월별 실행 계획과 예상 투자액을 설계합니다.</div>
-      </div>
-      <div class="service-item">
-        <div class="s-num">08</div>
-        <div class="s-name"><strong>헤어스타일</strong> 추천</div>
-        <div class="s-desc">얼굴형, 이마선을 기반으로 BEST/GOOD/WORST 스타일을 레퍼런스 이미지와 함께 제안합니다.</div>
-      </div>
-      <div class="service-item">
-        <div class="s-num">09</div>
-        <div class="s-name"><strong>화장품</strong> 추천 (데일리 루틴)</div>
-        <div class="s-desc">피부 타입에 맞는 클렌저·토너·앰플·크림 라인업을 구체적 제품명과 함께 추천합니다.</div>
-      </div>
-    </div>
-
-    <div style="margin-top:20px;padding:20px 24px;background:var(--paper2);border-left:2px solid var(--gold);" class="reveal">
-      <div style="font-size:13px;color:var(--ink);font-weight:500;margin-bottom:4px;">2차 리포트 전달 후 카카오톡 추가 상담 가능</div>
-      <div style="font-size:13px;color:var(--muted);">리포트를 보면서 생기는 질문을 카카오톡으로 주시면 답변드립니다. (의학적 진단, 병원 추천 등 의료법 위반 사항은 제외)</div>
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-
-<!-- ════════════════════ PROCESS ════════════════════ -->
-<section class="sec process-sec">
-  <div class="sec-inner">
-    <div class="sec-label reveal">How It Works</div>
-    <h2 class="sec-h2 reveal" style="color:#f0ece4;">진행 <span style="color:var(--gold2);">프로세스</span></h2>
-    <p class="sec-body reveal">신청부터 리포트 수령까지, <strong>간단</strong>합니다. (총 4단계)</p>
-<div class="process-flow reveal">
-      <div class="process-step">
-        <div class="process-left"><div class="process-circle">1</div></div>
-        <div class="process-right">
-          <div class="process-title">결제 후 카톡 방 입장 (1분)<br><span style="font-size:11px;font-weight:400;color:#f0ece4;">현재 카카오페이 송금 결제만 가능<br>(사업자 등록 진행 중)</span></div>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-left"><div class="process-circle">2</div></div>
-        <div class="process-right">
-          <div class="process-title">MGPI 문진 + 셀프 촬영 후 전송</div>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="process-left"><div class="process-circle">3</div></div>
-        <div class="process-right">
-          <div class="process-title">1차 리포트(정밀 분석 결과) 전달 + 2차용 피드백 설문 (3분)</div>
-          <div class="process-note">사진 수령 후 72시간 이내</div>
-        </div>
-      </div>
-      
-      <div class="process-step">
-        <div class="process-left"><div class="process-circle">4</div></div>
-        <div class="process-right">
-          <div class="process-title">2차 리포트 전달 : 맞춤 실행 로드맵</div>
-          <div class="process-desc">설문 완료 후 익일 이내</div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-
-<!-- ════════════════════ SAMPLE MOCKUP ════════════════════ -->
-<section class="sec sample-sec">
-  <div class="sec-inner">
-    <div class="sec-label reveal">Sample Report</div>
-    <h2 class="sec-h2 reveal">리포트 미리보기 - 총 14P 중 일부</h2>
-    <p class="sec-body reveal">📊 총 14페이지 맞춤 분석 리포트<br>
-<span style="font-size:19px;">🕖 1인당 분석 시간 평균 <strong>12</strong>시간 이상<br>🔎 의미 없는 붙여넣기 식 뻥튀기 내용이 아닌 <strong>수작업</strong> 정밀 분석<br>
-💯 당신에게 정말 필요한 <strong>핵심 정보</strong>만 담았습니다.<br><br>실제 리포트의 일부 페이지입니다.</span>
-
-</p>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;" class="reveal">
-      <div style="border:1px solid var(--rule);overflow:hidden;">
-        <div style="background:var(--ink);padding:10px 16px;font-size:9px;letter-spacing:2px;color:var(--gold);">01 · MGPI Analysis</div>
-        <img src="https://drive.google.com/thumbnail?id=1AC8-MD-5jNQtrPsJWC88kTCEi969eXhs&sz=w1200" style="width:100%;display:block;" alt="MGPI Analysis">
-      </div>
-      <div style="border:1px solid var(--rule);overflow:hidden;">
-        <div style="background:var(--ink);padding:10px 16px;font-size:9px;letter-spacing:2px;color:var(--gold);">02 · 얼굴 비율 분석</div>
-        <img src="https://drive.google.com/thumbnail?id=1QwcANgk6MMAbk2kJ0GfJDK4vLtowICes&sz=w1200" style="width:100%;display:block;" alt="얼굴 비율 분석">
-      </div>
-      <div style="border:1px solid var(--rule);overflow:hidden;">
-        <div style="background:var(--ink);padding:10px 16px;font-size:9px;letter-spacing:2px;color:var(--gold);">03 · 클레이모드 + Solution</div>
-        <img src="https://drive.google.com/thumbnail?id=1dUwfR4vvJF4N1Rc4bsfXTklEeqFOkV57&sz=w1200" style="width:100%;display:block;" alt="클레이모드 분석">
-      </div>
-<div style="border:1px solid var(--rule);overflow:hidden;position:relative;">
-        <div style="background:var(--ink);padding:10px 16px;font-size:9px;letter-spacing:2px;color:var(--gold);">04 · Simulation + 로드맵 <span style="color:var(--muted);margin-left:6px;">2차 전달</span></div>
-        <img src="https://drive.google.com/thumbnail?id=1g4UKck9HE_B7N3PtycXNP9KdkVDcdsmO&sz=w1200" style="width:100%;display:block;" alt="시뮬레이션 및 로드맵">
-      </div>
-    </div>
-
-    <div style="margin-top:16px;font-size:11px;color:var(--muted);text-align:center;">
-      * 세부 솔루션 및 개인 정보 일부는 블라인드 처리되었습니다.
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-
-<!-- ════════════════════ PRICING ════════════════════ -->
 <section class="sec pricing-sec" id="pricing">
   <div class="sec-inner">
     <div class="sec-label reveal">Pricing</div>
@@ -1048,8 +323,6 @@ footer{
 
 <hr class="rule">
 
-
-<!-- ════════════════════ FAQ ════════════════════ -->
 <section class="sec faq-sec">
   <div class="sec-inner-sm">
     <div class="sec-label reveal">FAQ</div>
@@ -1087,9 +360,6 @@ footer{
   </div>
 </section>
 
-
-<!-- ════════════════════ FOOTER ════════════════════ -->
-<!-- ════════════════════ PAYMENT MODAL ════════════════════ -->
 <div id="payModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;">
   <div style="background:var(--paper);border:1px solid var(--rule);padding:40px 36px;max-width:380px;width:90%;text-align:center;position:relative;">
     <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;">✕</button>
@@ -1106,7 +376,6 @@ footer{
   </div>
 </div>
 
-<!-- ════════════════════ MOBILE PAYMENT MODAL ════════════════════ -->
 <div id="mobilePayModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;">
   <div style="background:var(--paper);border:1px solid var(--rule);padding:40px 28px 32px;max-width:340px;width:90%;text-align:center;position:relative;">
     <button onclick="closeMobileModal()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;">✕</button>
@@ -1126,8 +395,6 @@ footer{
   </div>
 </div>
 
-
-
 <footer>
   <div class="footer-left">
     <div class="footer-brand">Men's Total Image Strategy</div>
@@ -1140,15 +407,11 @@ footer{
   </div>
 </footer>
 
-
-<!-- FLOATING BAR -->
 <div class="float-bar" id="floatBar">
   <a href="https://pf.kakao.com/_CdxbqX/chat" target="_blank" class="float-kakao" title="카카오톡 상담">
     <svg viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67-.15.56-.96 3.56-.99 3.77 0 0-.02.16.08.22.1.06.22.03.22.03.29-.04 3.4-2.24 3.93-2.62.67.1 1.36.15 2.1.15 5.52 0 10-3.58 10-7.94S17.52 3 12 3z"/></svg>
   </a>
-  
 </div>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
@@ -1189,20 +452,6 @@ window.addEventListener('click',function(e){
   if(e.target===document.getElementById('payModal')) closeModal();
   if(e.target===document.getElementById('mobilePayModal')) closeMobileModal();
 });
-</script>
-<script>
-// Self-check
-let checkedCount = 0;
-function toggleCheck(el){
-  el.classList.toggle('checked');
-  checkedCount = document.querySelectorAll('.check-item.checked').length;
-  const result = document.getElementById('checkResult');
-  if(checkedCount >= 2){
-    result.classList.add('show');
-  } else {
-    result.classList.remove('show');
-  }
-}
 
 // FAQ
 function toggleFaq(el){
@@ -1212,7 +461,7 @@ function toggleFaq(el){
 // Floating bar
 const fb = document.getElementById('floatBar');
 window.addEventListener('scroll',()=>{
-  fb.classList.toggle('visible', window.scrollY > 500);
+  fb.classList.toggle('visible', window.scrollY > 300);
 });
 
 // Mobile: keep modal visible after returning from KakaoPay
@@ -1233,7 +482,6 @@ const obs = new IntersectionObserver(entries=>{
 },{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
-
 
 </body>
 </html>
