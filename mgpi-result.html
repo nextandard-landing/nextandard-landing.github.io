@@ -30,37 +30,30 @@
     background: var(--bg);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.6s ease;
+    z-index: 9999; transition: opacity 0.6s ease;
   }
   #loader.fade-out { opacity:0; pointer-events:none; }
   .loader-logo {
     font-family: 'Noto Serif KR', serif;
     font-size: 2rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.2em;
-    margin-bottom: 2.5rem;
+    color: var(--gold); letter-spacing: 0.2em; margin-bottom: 2.5rem;
   }
   .loader-spinner {
     width: 44px; height: 44px;
     border: 2px solid rgba(212,175,55,0.2);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1.5rem;
+    border-top-color: var(--gold); border-radius: 50%;
+    animation: spin 1s linear infinite; margin-bottom: 1.5rem;
   }
   .loader-text {
-    font-size: 0.85rem;
-    color: rgba(223,223,222,0.45);
-    letter-spacing: 0.1em;
-    animation: pulse 2s ease-in-out infinite;
+    font-size: 0.85rem; color: rgba(223,223,222,0.45);
+    letter-spacing: 0.1em; animation: pulse 2s ease-in-out infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
   /* ── 에러 ── */
   #error-screen {
-    display: none; position: fixed; inset: 0;
-    background: var(--bg);
+    display: none; position: fixed; inset: 0; background: var(--bg);
     align-items: center; justify-content: center;
     flex-direction: column; gap: 1rem; z-index: 9998;
   }
@@ -75,49 +68,38 @@
 
   /* ── 메인 ── */
   #content {
-    display: none;
-    max-width: 680px; margin: 0 auto;
-    padding: 2rem 1.25rem 4rem;
-    animation: fadeIn 0.8s ease;
+    display: none; max-width: 680px; margin: 0 auto;
+    padding: 2rem 1.25rem 4rem; animation: fadeIn 0.8s ease;
   }
   #content.show { display: block; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
 
   /* ── 헤더 ── */
   .report-header {
-    text-align: center;
-    padding: 3rem 0 2.5rem;
-    border-bottom: 1px solid var(--gold-border);
-    margin-bottom: 3rem;
+    text-align: center; padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--gold-border); margin-bottom: 3rem;
   }
   .report-badge {
-    display: inline-block;
-    font-size: 0.68rem; letter-spacing: 0.2em;
-    color: var(--gold);
-    border: 1px solid var(--gold-border);
-    padding: 0.3rem 1rem; border-radius: 2px;
-    margin-bottom: 1.5rem; text-transform: uppercase;
+    display: inline-block; font-size: 0.68rem; letter-spacing: 0.15em;
+    color: var(--gold); border: 1px solid var(--gold-border);
+    padding: 0.3rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
   }
   .type-code {
     font-family: 'Noto Serif KR', serif;
-    font-size: 3rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.15em;
-    line-height: 1.1; margin-bottom: 0.75rem;
+    font-size: 3rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.15em; line-height: 1.1; margin-bottom: 0.75rem;
   }
   .type-name {
     font-size: 1.4rem; font-weight: 500;
     color: var(--text); margin-bottom: 0.75rem;
   }
   .type-hashtag {
-    display: inline-block;
-    font-size: 0.8rem; color: rgba(212,175,55,0.8);
-    background: var(--gold-dim);
-    padding: 0.3rem 1rem; border-radius: 2px;
-    margin-bottom: 1rem;
+    display: inline-block; font-size: 0.8rem; color: rgba(212,175,55,0.8);
+    background: var(--gold-dim); padding: 0.3rem 1rem;
+    border-radius: 2px; margin-bottom: 1rem;
   }
   .type-feature {
-    font-size: 0.88rem;
-    color: rgba(223,223,222,0.6);
+    font-size: 0.88rem; color: rgba(223,223,222,0.6);
     max-width: 480px; margin: 0 auto;
   }
 
@@ -125,35 +107,32 @@
   .section { margin-bottom: 3rem; }
   .section-eyebrow {
     font-size: 0.68rem; letter-spacing: 0.2em;
-    color: var(--gold); text-transform: uppercase;
-    margin-bottom: 0.35rem;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 0.35rem;
   }
   .section-title {
     font-family: 'Noto Serif KR', serif;
-    font-size: 1.1rem; font-weight: 600;
-    color: var(--text);
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--card-border);
+    font-size: 1.1rem; font-weight: 600; color: var(--text);
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--card-border);
     margin-bottom: 1.5rem;
+  }
+
+  /* 이름 강조 스타일 */
+  .name-highlight {
+    font-weight: 700; font-size: 1.05em; color: var(--gold);
   }
 
   /* ── Executive Summary ── */
   .summary-box {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-left: 3px solid var(--gold);
-    border-radius: 4px; padding: 1.5rem;
-    font-size: 0.9rem; line-height: 1.9;
-    color: rgba(223,223,222,0.85);
-    white-space: pre-line;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-left: 3px solid var(--gold); border-radius: 4px; padding: 1.5rem;
+    font-size: 0.9rem; line-height: 1.9; color: rgba(223,223,222,0.85);
   }
 
   /* ── 분포도 ── */
   .axis-list { display: flex; flex-direction: column; gap: 2rem; }
-  .axis-item {}
   .axis-top {
     display: flex; justify-content: space-between;
-    align-items: center; margin-bottom: 0.6rem;
+    align-items: center; margin-bottom: 0.5rem;
   }
   .axis-eyebrow {
     font-size: 0.68rem; letter-spacing: 0.15em;
@@ -170,167 +149,128 @@
   .axis-name {
     font-family: 'Noto Serif KR', serif;
     font-size: 1rem; font-weight: 600;
-    text-align: center; margin-bottom: 1rem;
+    text-align: center; margin-bottom: 0.9rem;
   }
 
+  /* 바 전체 레이아웃 */
   .bar-row {
-    display: flex; align-items: center; gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;
   }
-  .bar-label {
-    font-size: 0.78rem; color: rgba(223,223,222,0.45);
-    min-width: 20px; text-align: center;
+  .bar-side {
+    display: flex; flex-direction: column; align-items: center;
+    min-width: 60px;
   }
+  .bar-side-name {
+    font-size: 0.72rem; font-weight: 500;
+    color: rgba(223,223,222,0.5); line-height: 1.2;
+  }
+  .bar-side-pct {
+    font-size: 0.78rem; font-weight: 700;
+    color: rgba(223,223,222,0.45); line-height: 1.2;
+  }
+  /* 우세한 쪽 강조 */
+  .bar-side.dominant .bar-side-name { color: var(--text); font-weight: 700; }
+  .bar-side.dominant .bar-side-pct  { color: var(--gold); font-size: 0.88rem; }
+
   .bar-track {
-    flex: 1; height: 5px;
+    flex: 1; height: 7px;
     background: rgba(255,255,255,0.07);
-    border-radius: 3px; position: relative; overflow: visible;
+    border-radius: 4px; position: relative; overflow: hidden;
   }
-  /* 중앙선 */
-  .bar-track::after {
-    content: '';
-    position: absolute; left: 50%; top: -3px; bottom: -3px;
-    width: 1px; background: rgba(255,255,255,0.15);
+  /* 전체 바 (흐릿하게 꽉 채운 배경) */
+  .bar-track::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(212,175,55,0.15); border-radius: 4px;
   }
-  /* 채워지는 바 */
+  /* 우세한 쪽으로 채워지는 바 */
   .bar-fill {
     position: absolute; top: 0; bottom: 0;
-    border-radius: 3px;
-    background: var(--gold);
+    background: var(--gold); border-radius: 4px;
     transition: width 1s cubic-bezier(0.4,0,0.2,1);
   }
-  .bar-pct-row {
-    display: flex; justify-content: space-between;
-    font-size: 0.75rem; color: rgba(223,223,222,0.45);
-    padding: 0 calc(20px + 0.75rem);
-    margin-bottom: 0.6rem;
-  }
+
   .axis-desc {
     font-size: 0.8rem; color: rgba(223,223,222,0.45);
-    text-align: center; font-style: italic;
-    line-height: 1.6;
+    text-align: left; font-style: italic; line-height: 1.6;
+    margin-top: 0.5rem;
   }
 
   /* ── SWOT ── */
-  .swot-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
-  }
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
   .swot-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--card-bg); border: 1px solid var(--card-border);
     border-radius: 4px; padding: 1.1rem;
   }
   .swot-label {
-    font-size: 0.68rem; letter-spacing: 0.15em;
-    font-weight: 700; text-transform: uppercase;
-    padding-bottom: 0.5rem; margin-bottom: 0.6rem;
+    font-size: 0.68rem; letter-spacing: 0.15em; font-weight: 700;
+    text-transform: uppercase; padding-bottom: 0.5rem; margin-bottom: 0.6rem;
   }
   .swot-s .swot-label { color: #4a7fff; border-bottom: 1px solid rgba(74,127,255,0.25); }
   .swot-w .swot-label { color: #EF6868; border-bottom: 1px solid rgba(239,104,104,0.25); }
   .swot-o .swot-label { color: #1AB447; border-bottom: 1px solid rgba(26,180,71,0.25); }
   .swot-t .swot-label { color: #ff4444; border-bottom: 1px solid rgba(255,68,68,0.25); }
-  .swot-title {
-    font-size: 0.8rem; font-weight: 600;
-    color: var(--text); margin-bottom: 0.5rem;
-  }
-  .swot-card p {
-    font-size: 0.82rem;
-    color: rgba(223,223,222,0.72);
-    line-height: 1.65; white-space: pre-line;
-  }
+  .swot-title { font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+  .swot-card p { font-size: 0.82rem; color: rgba(223,223,222,0.72); line-height: 1.65; }
 
   /* ── Winning Strategy ── */
   .strategy-card {
-    background: var(--gold-dim);
-    border: 1px solid var(--gold-border);
-    border-radius: 4px; padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    background: var(--gold-dim); border: 1px solid var(--gold-border);
+    border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem;
   }
   .strategy-goal {
-    font-size: 0.78rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.05em;
-    margin-bottom: 0.75rem;
+    font-size: 0.78rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.05em; margin-bottom: 0.75rem;
   }
   .strategy-summary {
-    font-size: 0.9rem; line-height: 1.8;
-    color: rgba(223,223,222,0.85); white-space: pre-line;
+    font-size: 0.9rem; line-height: 1.8; color: rgba(223,223,222,0.85);
   }
 
   /* ── 필승 목표 ── */
   .goals-list { display: flex; flex-direction: column; gap: 0.75rem; }
   .goal-item {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--card-bg); border: 1px solid var(--card-border);
     border-radius: 4px; padding: 1.1rem 1.25rem;
   }
-  .goal-header {
-    display: flex; align-items: center; gap: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
+  .goal-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
   .goal-num {
-    font-size: 0.68rem; font-weight: 700;
-    color: var(--gold); background: var(--gold-dim);
-    border-radius: 2px; padding: 0.2rem 0.5rem;
-    min-width: 28px; text-align: center;
+    font-size: 0.68rem; font-weight: 700; color: var(--gold);
+    background: var(--gold-dim); border-radius: 2px;
+    padding: 0.2rem 0.5rem; min-width: 28px; text-align: center;
   }
-  .goal-title {
-    font-size: 0.88rem; font-weight: 600; color: var(--text);
-  }
+  .goal-title { font-size: 0.88rem; font-weight: 600; color: var(--text); }
   .goal-detail {
     font-size: 0.82rem; color: rgba(223,223,222,0.65);
-    line-height: 1.65; white-space: pre-line;
-    padding-left: calc(28px + 0.75rem);
+    line-height: 1.65; padding-left: calc(28px + 0.75rem);
   }
 
   /* ── Expert Advice ── */
   .expert-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--card-bg); border: 1px solid var(--card-border);
     border-radius: 4px; padding: 1.5rem;
   }
-  .expert-title {
-    font-size: 0.88rem; font-weight: 700;
-    color: var(--gold); margin-bottom: 0.75rem;
-  }
-  .expert-detail {
-    font-size: 0.88rem; line-height: 1.85;
-    color: rgba(223,223,222,0.82); white-space: pre-line;
-  }
+  .expert-title { font-size: 0.88rem; font-weight: 700; color: var(--gold); margin-bottom: 0.75rem; }
+  .expert-detail { font-size: 0.88rem; line-height: 1.85; color: rgba(223,223,222,0.82); }
 
   /* ── CTA ── */
   .cta-section {
-    margin-top: 3.5rem; text-align: center;
-    padding: 2.5rem 0;
+    margin-top: 3.5rem; text-align: center; padding: 2.5rem 0;
     border-top: 1px solid var(--card-border);
   }
-  .cta-label {
-    font-size: 0.8rem; color: rgba(223,223,222,0.35);
-    letter-spacing: 0.05em; margin-bottom: 1.5rem;
-  }
+  .cta-label { font-size: 0.9rem; color: rgba(223,223,222,0.6); margin-bottom: 1.25rem; font-weight: 500; }
   .cta-btn {
-    display: inline-block;
-    background: var(--gold); color: #1a1917;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.92rem; font-weight: 700;
-    letter-spacing: 0.03em;
-    padding: 1rem 2.5rem; border-radius: 3px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    display: inline-block; background: var(--gold); color: #1a1917;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 0.92rem; font-weight: 700;
+    letter-spacing: 0.03em; padding: 1rem 2.5rem; border-radius: 3px;
+    text-decoration: none; transition: all 0.2s ease;
   }
-  .cta-btn:hover {
-    background: #e8c84a;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(212,175,55,0.25);
-  }
-  .cta-sub {
-    margin-top: 1rem;
-    font-size: 0.75rem; color: rgba(223,223,222,0.3);
-  }
+  .cta-btn:hover { background: #e8c84a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.25); }
+  .cta-sub { margin-top: 1rem; font-size: 0.75rem; color: rgba(223,223,222,0.3); }
 
   @media (max-width: 480px) {
     .type-code { font-size: 2.4rem; }
     .swot-grid { grid-template-columns: 1fr; }
     #content { padding: 1.5rem 1rem 3rem; }
+    .bar-side { min-width: 52px; }
   }
 </style>
 </head>
@@ -352,7 +292,7 @@
 
   <!-- 헤더 -->
   <div class="report-header">
-    <div class="report-badge">MGPI · Appearance Management Profile</div>
+    <div class="report-badge">MGPI 외모 관리 성향 분석</div>
     <div class="type-code" id="typeCode"></div>
     <div class="type-name" id="typeName"></div>
     <div class="type-hashtag" id="typeHashtag"></div>
@@ -362,21 +302,21 @@
   <!-- Section 01 -->
   <div class="section">
     <div class="section-eyebrow">Section 01</div>
-    <div class="section-title">Executive Summary · 전략적 개요</div>
+    <div class="section-title" id="sec1Title">특성 개요</div>
     <div class="summary-box" id="execSummary"></div>
   </div>
 
   <!-- Section 02 -->
   <div class="section">
     <div class="section-eyebrow">Section 02</div>
-    <div class="section-title">Preference Balance · 성향 분포도</div>
+    <div class="section-title">성향 분포도</div>
     <div class="axis-list" id="axisList"></div>
   </div>
 
   <!-- Section 03 -->
   <div class="section">
     <div class="section-eyebrow">Section 03</div>
-    <div class="section-title">SWOT Analysis · 관리 잠재력 분석</div>
+    <div class="section-title" id="sec3Title">관리 성향 SWOT 분석</div>
     <div class="swot-grid">
       <div class="swot-card swot-s">
         <div class="swot-label">Strength · 강점</div>
@@ -404,7 +344,7 @@
   <!-- Section 04 -->
   <div class="section">
     <div class="section-eyebrow">Section 04</div>
-    <div class="section-title">Winning Strategy · 필승 전략</div>
+    <div class="section-title" id="sec4Title">관리 성공 전략</div>
     <div class="strategy-card">
       <div class="strategy-goal" id="strategyGoal"></div>
       <div class="strategy-summary" id="strategySummary"></div>
@@ -415,7 +355,7 @@
   <!-- Section 05 -->
   <div class="section">
     <div class="section-eyebrow">Section 05</div>
-    <div class="section-title">Expert's Advice · 전문가 한마디</div>
+    <div class="section-title">전문가 한마디</div>
     <div class="expert-card">
       <div class="expert-title" id="expertTitle"></div>
       <div class="expert-detail" id="expertDetail"></div>
@@ -424,8 +364,8 @@
 
   <!-- CTA -->
   <div class="cta-section">
-    <p class="cta-label"><strong>👇 내 성향에 맞는 외모 개선 방법이 궁금하면? 👇</strong></p>
-    <a href="https://nextandard-landing.github.io/" class="cta-btn" id="ctaBtn">[남성 전용] 내 얼굴 분석하기 →</a>
+    <p class="cta-label" id="ctaLabel">👇 내 성향에 맞는 외모 개선 방법이 궁금하면? 👇</p>
+    <a href="https://nextandard-landing.github.io/" class="cta-btn">[남성 전용] 내 얼굴 분석하기 →</a>
     <p class="cta-sub">Nextandard · 남성 외모 관리 전문 컨설팅</p>
   </div>
 
@@ -434,20 +374,31 @@
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsayHxIajM75sEafWbZD7TmIsqnzZEJ4XcSznpoCQRkt79CHgpYFAhkLDt7Jc1_pzD/exec';
 
+// 보수 척도 기본값 (점수=0 일 때 적용)
+// S<O, A<C, H<E → 우측 우세 기본 (+1 처리)
+// P>I → 좌측 우세 기본 (-1 처리)
+const CONSERVATIVE_BIAS = { SO: 1, AC: 1, HE: 1, PI: -1 };
+
 function getRecordId() {
   return new URLSearchParams(window.location.search).get('recordId');
+}
+
+// innerHTML로 이름 강조 치환
+function highlightName(text, name) {
+  if (!name || !text) return text || '';
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(escaped, 'g'),
+    `<span class="name-highlight">${name}</span>`);
+}
+
+function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html || '';
 }
 
 function setText(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val || '';
-}
-
-// 점수 → 좌측(S/A/H/P) 퍼센트
-function leftPct(score) {
-  // score > 0 이면 우측 우세, score < 0 이면 좌측 우세
-  // 범위: -32 ~ +32 기준
-  return Math.round((32 - score) / 64 * 100);
 }
 
 function getBadge(absScore) {
@@ -456,20 +407,31 @@ function getBadge(absScore) {
   return                     { text: '유연 (Balanced)', cls: 'badge-balanced' };
 }
 
-function renderAxis(container, eyebrow, axisName, leftLabel, rightLabel, score, desc) {
-  const lPct = leftPct(score);
+// 분포도 렌더링
+// score: 원본 점수, bias: 0일 때 보정값
+// leftLabel/rightLabel: 예) '직관형 (S)' / '데이터형 (O)'
+function renderAxis(container, eyebrow, axisName, leftLabel, rightLabel, score, bias, desc) {
+  // 보수 척도 반영: score=0이면 bias 적용
+  const adjScore = (score === 0) ? bias : score;
+
+  // 좌측 퍼센트 계산 (범위 -32~+32)
+  let lPct = Math.round((32 - adjScore) / 64 * 100);
+  lPct = Math.max(1, Math.min(99, lPct)); // 0%/100% 방지
   const rPct = 100 - lPct;
+
   const badge = getBadge(Math.abs(score));
 
-  // 바 채우기: 중앙(50%)에서 우세한 쪽으로
+  // 우세한 쪽 판별
+  const leftDominant  = lPct > rPct;
+  const rightDominant = rPct > lPct;
+
+  // 바: 전체 배경(흐릿한 골드) + 우세 쪽으로 채워지는 바
+  // 우세 쪽 퍼센트만큼 left:0 또는 right:0 에서 채움
   let fillStyle = '';
-  if (score < 0) {
-    // 좌측 우세: right:50% 에서 왼쪽으로 확장
-    const w = Math.min(50, (lPct - 50));
-    fillStyle = `right:50%; width:${Math.max(0,lPct-50)}%; left:auto;`;
+  if (leftDominant) {
+    fillStyle = `left:0; width:${lPct}%;`;
   } else {
-    // 우측 우세: left:50% 에서 오른쪽으로 확장
-    fillStyle = `left:50%; width:${Math.max(0,rPct-50)}%;`;
+    fillStyle = `right:0; width:${rPct}%; left:auto;`;
   }
 
   container.insertAdjacentHTML('beforeend', `
@@ -480,23 +442,24 @@ function renderAxis(container, eyebrow, axisName, leftLabel, rightLabel, score, 
       </div>
       <div class="axis-name">${axisName}</div>
       <div class="bar-row">
-        <span class="bar-label">${leftLabel}</span>
+        <div class="bar-side ${leftDominant ? 'dominant' : ''}">
+          <span class="bar-side-name">${leftLabel}</span>
+          <span class="bar-side-pct">${lPct}%</span>
+        </div>
         <div class="bar-track">
           <div class="bar-fill" style="${fillStyle}"></div>
         </div>
-        <span class="bar-label">${rightLabel}</span>
-      </div>
-      <div class="bar-pct-row">
-        <span>${leftLabel} ${lPct}%</span>
-        <span>${rightLabel} ${rPct}%</span>
+        <div class="bar-side ${rightDominant ? 'dominant' : ''}" style="align-items:flex-end">
+          <span class="bar-side-name">${rightLabel}</span>
+          <span class="bar-side-pct">${rPct}%</span>
+        </div>
       </div>
       ${desc ? `<div class="axis-desc">${desc}</div>` : ''}
     </div>
   `);
 }
 
-function renderGoals(container, goals) {
-  // goals: [{title, detail}, ...]
+function renderGoals(container, goals, name) {
   goals.forEach((g, i) => {
     if (!g.title && !g.detail) return;
     container.insertAdjacentHTML('beforeend', `
@@ -505,7 +468,7 @@ function renderGoals(container, goals) {
           <span class="goal-num">0${i+1}</span>
           <span class="goal-title">${g.title}</span>
         </div>
-        ${g.detail ? `<div class="goal-detail">${g.detail}</div>` : ''}
+        ${g.detail ? `<div class="goal-detail">${highlightName(g.detail, name)}</div>` : ''}
       </div>
     `);
   });
@@ -532,40 +495,56 @@ async function loadResult() {
     const d = await res.json();
     if (!d || d.error) { showError(); return; }
 
+    const name = d.name || '';
+    const code = d.code || '';
+
     // 헤더
-    setText('typeCode',    d.code);
-    setText('typeName',    d.typeName);
+    setText('typeCode',    code);
+    setText('typeName',    `"${d.typeName}"`);
     setText('typeHashtag', d.hashtag);
     setText('typeFeature', d.feature);
 
-    // Section 01
-    setText('execSummary', d.execSummary);
+    // 섹션 제목에 이름+코드 삽입
+    setText('sec1Title', `${name}(${code})님 특성 개요`);
+    setText('sec3Title', `${name}(${code})님 관리 성향 SWOT 분석`);
+    setText('sec4Title', `${name}(${code})님 관리 성공 전략`);
+
+    // Section 01: 이름 강조
+    setHTML('execSummary', highlightName(d.execSummary, name));
 
     // Section 02: 분포도
     const axisList = document.getElementById('axisList');
-    renderAxis(axisList, 'PERCEPTION', '인식 체계', 'S', 'O', d.scoreSOraw, d.descSO);
-    renderAxis(axisList, 'CHARACTER',  '행동 성향', 'A', 'C', d.scoreACraw, d.descAC);
-    renderAxis(axisList, 'VALUE',      '가치 판단', 'H', 'E', d.scoreHEraw, d.descHE);
-    renderAxis(axisList, 'APPROACH',   '접근 방식', 'P', 'I', d.scorePIraw, d.descPI);
+    renderAxis(axisList, 'PERCEPTION', '인식 체계',
+      '직관형 (S)', '데이터형 (O)', d.scoreSOraw, CONSERVATIVE_BIAS.SO, d.descSO);
+    renderAxis(axisList, 'CHARACTER', '행동 성향',
+      '도전형 (A)', '안전형 (C)', d.scoreACraw, CONSERVATIVE_BIAS.AC, d.descAC);
+    renderAxis(axisList, 'VALUE', '가치 판단',
+      '투자형 (H)', '효율형 (E)', d.scoreHEraw, CONSERVATIVE_BIAS.HE, d.descHE);
+    renderAxis(axisList, 'APPROACH', '접근 방식',
+      '관리형 (P)', '해결형 (I)', d.scorePIraw, CONSERVATIVE_BIAS.PI, d.descPI);
 
-    // Section 03: SWOT
-    setText('swotSTitle', d.swotSTitle); setText('swotS', d.swotS);
-    setText('swotWTitle', d.swotWTitle); setText('swotW', d.swotW);
-    setText('swotOTitle', d.swotOTitle); setText('swotO', d.swotO);
-    setText('swotTTitle', d.swotTTitle); setText('swotT', d.swotT);
+    // Section 03: SWOT - 이름 강조
+    setText('swotSTitle', d.swotSTitle);
+    setHTML('swotS', highlightName(d.swotS, name));
+    setText('swotWTitle', d.swotWTitle);
+    setHTML('swotW', highlightName(d.swotW, name));
+    setText('swotOTitle', d.swotOTitle);
+    setHTML('swotO', highlightName(d.swotO, name));
+    setText('swotTTitle', d.swotTTitle);
+    setHTML('swotT', highlightName(d.swotT, name));
 
-    // Section 04: 전략
-    setText('strategyGoal',    d.strategyGoal);
-    setText('strategySummary', d.strategySummary);
+    // Section 04: 전략 - 이름 강조
+    setText('strategyGoal', d.strategyGoal);
+    setHTML('strategySummary', highlightName(d.strategySummary, name));
     renderGoals(document.getElementById('goalsList'), [
       { title: d.goal1Title, detail: d.goal1Detail },
       { title: d.goal2Title, detail: d.goal2Detail },
       { title: d.goal3Title, detail: d.goal3Detail },
-    ]);
+    ], name);
 
-    // Section 05: Expert
-    setText('expertTitle',  d.expertTitle);
-    setText('expertDetail', d.expertDetail);
+    // Section 05: Expert - 이름 강조
+    setText('expertTitle', d.expertTitle);
+    setHTML('expertDetail', highlightName(d.expertDetail, name));
 
     // 화면 전환
     hideLoader();
