@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGPI 결과 리포트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1917;
+    --text: #DFDFDE;
+    --gold: #D4AF37;
+    --gold-dim: rgba(212,175,55,0.15);
+    --gold-border: rgba(212,175,55,0.3);
+    --strength: #143DF1;
+    --weakness: #EF6868;
+    --opportunity: #1AB447;
+    --threat: #FF0000;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-border: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── 로딩 화면 ── */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease;
+  }
+  #loader.fade-out { opacity: 0; pointer-events: none; }
+
+  .loader-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 2.5rem;
+  }
+
+  .loader-spinner {
+    width: 48px; height: 48px;
+    border: 2px solid rgba(212,175,55,0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1.5rem;
+  }
+
+  .loader-text {
+    font-size: 0.85rem;
+    color: rgba(223,223,222,0.5);
+    letter-spacing: 0.1em;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  /* ── 에러 화면 ── */
+  #error-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 9998;
+  }
+  #error-screen.show { display: flex; }
+  #error-screen p { color: var(--weakness); font-size: 1rem; }
+  #error-screen button {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    background: var(--gold);
+    color: #1a1917;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  /* ── 메인 컨텐츠 ── */
+  #content {
+    display: none;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+    animation: fadeIn 0.8s ease;
+  }
+  #content.show { display: block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+
+  /* ── 헤더 ── */
+  .report-header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--gold-border);
+    margin-bottom: 2.5rem;
+  }
+  .report-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    border: 1px solid var(--gold-border);
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+  .type-code {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .type-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  .type-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: rgba(212,175,55,0.8);
+    background: var(--gold-dim);
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+  .type-feature {
+    font-size: 0.9rem;
+    color: rgba(223,223,222,0.7);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── 섹션 공통 ── */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .section-subtitle {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  /* ── Executive Summary ── */
+  .summary-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(223,223,222,0.85);
+    white-space: pre-line;
+  }
+
+  /* ── Preference Balance 분포도 ── */
+  .axis-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .axis-item {}
+  .axis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .axis-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(223,223,222,0.5);
+    text-transform: uppercase;
+  }
+  .axis-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .badge-strong { background: rgba(212,175,55,0.2); color: var(--gold); }
+  .badge-moderate { background: rgba(223,223,222,0.1); color: rgba(223,223,222,0.7); }
+  .badge-balanced { background: rgba(26,180,71,0.15); color: #1AB447; }
+
+  .axis-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+  .bar-side-label {
+    font-size: 0.75rem;
+    color: rgba(223,223,222,0.5);
+    min-width: 32px;
+  }
+  .bar-side-label.right { text-align: right; }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-fill {
+    position: absolute;
+    top: 0; bottom: 0;
+    border-radius: 3px;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .bar-fill.left-fill {
+    right: 50%;
+    background: linear-gradient(to left, var(--gold), rgba(212,175,55,0.4));
+    transform-origin: right;
+  }
+  .bar-fill.right-fill {
+    left: 50%;
+    background: linear-gradient(to right, var(--gold), rgba(212,175,55,0.4));
+    transform-origin: left;
+  }
+  .bar-center-line {
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .bar-pct {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(223,223,222,0.5);
+    padding: 0 calc(32px + 0.75rem);
+  }
+  .axis-desc {
+    font-size: 0.8rem;
+    color: rgba(223,223,222,0.5);
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  /* ── SWOT ── */
+  .swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .swot-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 1.1rem;
+  }
+  .swot-card-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+  }
+  .swot-s .swot-card-title { color: #4a7fff; border-bottom: 1px solid rgba(20,61,241,0.3); padding-bottom: 0.4rem; }
+  .swot-w .swot-card-title { color: var(--weakness); border-bottom: 1px solid rgba(239,104,104,0.3); padding-bottom: 0.4rem; }
+  .swot-o .swot-card-title { color: var(--opportunity); border-bottom: 1px solid rgba(26,180,71,0.3); padding-bottom: 0.4rem; }
+  .swot-t .swot-card-title { color: #ff4444; border-bottom: 1px solid rgba(255,0,0,0.3); padding-bottom: 0.4rem; }
+  .swot-card p { font-size: 0.82rem; color: rgba(223,223,222,0.75); line-height: 1.6; white-space: pre-line; }
+
+  /* ── Winning Strategy ── */
+  .strategy-card {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .strategy-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .strategy-content {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(223,223,222,0.85);
+    white-space: pre-line;
+  }
+
+  /* ── Expert Advice ── */
+  .advice-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .advice-content {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(223,223,222,0.85);
+    white-space: pre-line;
+  }
+
+  /* ── 필승 목표 ── */
+  .goals-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .goal-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 1rem;
+  }
+  .goal-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border-radius: 2px;
+    padding: 0.2rem 0.5rem;
+    min-width: 28px;
+    text-align: center;
+    margin-top: 0.1rem;
+  }
+  .goal-text { font-size: 0.87rem; color: rgba(223,223,222,0.85); line-height: 1.6; }
+
+  /* ── CTA 버튼 ── */
+  .cta-section {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--card-border);
+  }
+  .cta-label {
+    font-size: 0.78rem;
+    color: rgba(223,223,222,0.4);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #1a1917;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 1rem 2.5rem;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .cta-btn:hover {
+    background: #e8c84a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212,175,55,0.3);
+  }
+  .cta-sub {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    color: rgba(223,223,222,0.35);
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width: 480px) {
+    .type-code { font-size: 2.2rem; }
+    .swot-grid { grid-template-columns: 1fr; }
+    #content { padding: 1.5rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 로딩 화면 -->
+<div id="loader">
+  <div class="loader-logo">MGPI</div>
+  <div class="loader-spinner"></div>
+  <p class="loader-text">결과를 분석하는 중입니다...</p>
+</div>
+
+<!-- 에러 화면 -->
+<div id="error-screen">
+  <p>결과를 불러오지 못했습니다.</p>
+  <p style="font-size:0.8rem;color:rgba(223,223,222,0.4)">잠시 후 다시 시도해주세요.</p>
+  <button onclick="location.reload()">다시 시도</button>
+</div>
+
+<!-- 메인 컨텐츠 -->
+<div id="content">
+
+  <!-- 헤더 -->
+  <div class="report-header">
+    <div class="report-badge">MGPI · Appearance Management Profile</div>
+    <div class="type-code" id="typeCode">—</div>
+    <div class="type-name" id="typeName">—</div>
+    <div class="type-tag" id="typeTag">—</div>
+    <div class="type-feature" id="typeFeature">—</div>
+  </div>
+
+  <!-- 1. Executive Summary -->
+  <div class="section">
+    <div class="section-title">Section 01</div>
+    <div class="section-subtitle">Executive Summary · 전략적 개요</div>
+    <div class="summary-card" id="summary">—</div>
+  </div>
+
+  <!-- 2. Preference Balance -->
+  <div class="section">
+    <div class="section-title">Section 02</div>
+    <div class="section-subtitle">Preference Balance · 성향 분포도</div>
+    <div class="axis-list" id="axisContainer"></div>
+  </div>
+
+  <!-- 3. SWOT -->
+  <div class="section">
+    <div class="section-title">Section 03</div>
+    <div class="section-subtitle">SWOT Analysis · 관리 잠재력 분석</div>
+    <div class="swot-grid">
+      <div class="swot-card swot-s">
+        <div class="swot-card-title">Strength · 강점</div>
+        <p id="swotS">—</p>
+      </div>
+      <div class="swot-card swot-w">
+        <div class="swot-card-title">Weakness · 약점</div>
+        <p id="swotW">—</p>
+      </div>
+      <div class="swot-card swot-o">
+        <div class="swot-card-title">Opportunity · 기회</div>
+        <p id="swotO">—</p>
+      </div>
+      <div class="swot-card swot-t">
+        <div class="swot-card-title">Threat · 위협</div>
+        <p id="swotT">—</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Winning Strategy -->
+  <div class="section">
+    <div class="section-title">Section 04</div>
+    <div class="section-subtitle">Winning Strategy · 필승 전략</div>
+    <div class="strategy-card">
+      <div class="strategy-title" id="strategyTitle">—</div>
+      <div class="strategy-content" id="strategyContent">—</div>
+    </div>
+  </div>
+
+  <!-- 5. 필승 목표 -->
+  <div class="section">
+    <div class="section-title">Section 05</div>
+    <div class="section-subtitle">Mission Goals · 필승 목표</div>
+    <div class="goals-list" id="goalsList"></div>
+  </div>
+
+  <!-- 6. Expert Advice -->
+  <div class="section">
+    <div class="section-title">Section 06</div>
+    <div class="section-subtitle">Expert's Advice · 전문가 한마디</div>
+    <div class="advice-card">
+      <div class="advice-content" id="expertAdvice">—</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <p class="cta-label">당신의 잠재력을 전문가와 함께 극대화하세요</p>
+    <!-- 랜딩페이지 URL로 교체 -->
+    <a href="https://nextandard-landing.github.io/" class="cta-btn">무료 상담 신청하기 →</a>
+    <p class="cta-sub">Nextandard · 남성 외모 관리 전문 컨설팅</p>
+  </div>
+
+</div>
+
+<script>
+// ── 설정: Apps Script 웹앱 URL (배포 후 교체) ──
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYf9LLGIdfn-e-qBGcfq2TPZ4rO8_yfupc7GFf9krOGq4MpK77pa5lHTXTuIzwMu7V/exec';
+
+// URL에서 recordId 추출
+function getRecordId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('recordId');
+}
+
+// 축 점수 → 퍼센트 (S-O: BC열, A-C: BD열, H-E: BE열, P-I: BF열)
+// 점수 범위 가정: -32 ~ +32 (좌측이 높으면 음수)
+function scoreToPct(score) {
+  const pct = Math.round((score + 32) / 64 * 100);
+  return Math.max(0, Math.min(100, pct));
+}
+
+function getBadge(absScore) {
+  if (absScore >= 10) return { text: '확실 (Strong)', cls: 'badge-strong' };
+  if (absScore >= 4)  return { text: '보통 (Moderate)', cls: 'badge-moderate' };
+  return { text: '유연 (Balanced)', cls: 'badge-balanced' };
+}
+
+// 분포도 바 렌더링
+function renderAxis(container, axisLabel, leftLabel, rightLabel, score, desc) {
+  const oPct  = scoreToPct(score);   // O/우측 퍼센트
+  const sPct  = 100 - oPct;          // S/좌측 퍼센트
+  const absScore = Math.abs(score);
+  const badge = getBadge(absScore);
+
+  // 어느 쪽이 우세한지
+  const dominant = score > 0
+    ? `${rightLabel}형 ${oPct}%`
+    : `${leftLabel}형 ${sPct}%`;
+
+  const axisNames = {
+    'PERCEPTION': '인식 체계',
+    'CHARACTER':  '행동 성향',
+    'VALUE':      '가치 판단',
+    'APPROACH':   '접근 방식'
+  };
+
+  const html = `
+    <div class="axis-item">
+      <div class="axis-header">
+        <span class="axis-label">${axisLabel}</span>
+        <span class="axis-badge ${badge.cls}">${badge.text}</span>
+      </div>
+      <div class="axis-title">${axisNames[axisLabel] || axisLabel}</div>
+      <div class="bar-wrap">
+        <span class="bar-side-label">${leftLabel}</span>
+        <div class="bar-track">
+          <div class="bar-center-line"></div>
+          ${score <= 0
+            ? `<div class="bar-fill left-fill" style="width:${Math.min(50, sPct/2)}%"></div>`
+            : `<div class="bar-fill right-fill" style="width:${Math.min(50, oPct/2)}%"></div>`
+          }
+        </div>
+        <span class="bar-side-label right">${rightLabel}</span>
+      </div>
+      <div class="bar-pct">
+        <span>${leftLabel} ${sPct}%</span>
+        <span>${rightLabel} ${oPct}%</span>
+      </div>
+      ${desc ? `<div class="axis-desc">${desc}</div>` : ''}
+    </div>
+  `;
+  container.insertAdjacentHTML('beforeend', html);
+}
+
+// 목표 렌더링
+function renderGoals(container, goalsText) {
+  if (!goalsText) return;
+  // "1. xxx 2. xxx 3. xxx" 패턴 파싱
+  const items = goalsText.split(/\d+\./).filter(s => s.trim());
+  items.forEach((item, i) => {
+    container.insertAdjacentHTML('beforeend', `
+      <div class="goal-item">
+        <span class="goal-num">0${i+1}</span>
+        <span class="goal-text">${item.trim()}</span>
+      </div>
+    `);
+  });
+}
+
+// 메인 로직
+async function loadResult() {
+  const recordId = getRecordId();
+
+  if (!recordId) {
+    showError();
+    return;
+  }
+
+  try {
+    const res = await fetch(`${APPS_SCRIPT_URL}?recordId=${encodeURIComponent(recordId)}`);
+    if (!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+
+    if (!data || data.error) {
+      showError();
+      return;
+    }
+
+    // 데이터 바인딩
+    document.getElementById('typeCode').textContent    = data.code || '—';
+    document.getElementById('typeName').textContent    = data.typeName || '—';
+    document.getElementById('typeTag').textContent     = data.hashtag || '—';
+    document.getElementById('typeFeature').textContent = data.feature || '—';
+    document.getElementById('summary').textContent     = data.summary || '—';
+
+    // SWOT
+    document.getElementById('swotS').textContent = data.swotS || '—';
+    document.getElementById('swotW').textContent = data.swotW || '—';
+    document.getElementById('swotO').textContent = data.swotO || '—';
+    document.getElementById('swotT').textContent = data.swotT || '—';
+
+    // 전략
+    document.getElementById('strategyTitle').textContent   = data.strategyTitle || '전략';
+    document.getElementById('strategyContent').textContent = data.strategyContent || '—';
+
+    // 필승 목표
+    renderGoals(document.getElementById('goalsList'), data.goals);
+
+    // Expert Advice
+    document.getElementById('expertAdvice').textContent = data.expertAdvice || '—';
+
+    // 분포도 (점수: SO, AC, HE, PI)
+    const axisContainer = document.getElementById('axisContainer');
+    renderAxis(axisContainer, 'PERCEPTION', 'S', 'O', data.scoreSOraw || 0, data.descSO);
+    renderAxis(axisContainer, 'CHARACTER',  'A', 'C', data.scoreACraw || 0, data.descAC);
+    renderAxis(axisContainer, 'VALUE',      'H', 'E', data.scoreHEraw || 0, data.descHE);
+    renderAxis(axisContainer, 'APPROACH',   'P', 'I', data.scorePIraw || 0, data.descPI);
+
+    // 화면 전환
+    hideLoader();
+    document.getElementById('content').classList.add('show');
+
+  } catch (e) {
+    console.error(e);
+    showError();
+  }
+}
+
+function hideLoader() {
+  const loader = document.getElementById('loader');
+  loader.classList.add('fade-out');
+  setTimeout(() => loader.style.display = 'none', 600);
+}
+
+function showError() {
+  hideLoader();
+  document.getElementById('error-screen').classList.add('show');
+}
+
+// 실행
+loadResult();
+</script>
+</body>
+</html>
