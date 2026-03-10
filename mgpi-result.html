@@ -377,7 +377,7 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsayHxIajM75sE
 // 보수 척도 기본값 (점수=0 일 때 적용)
 // S<O, A<C, H<E → 우측 우세 기본 (+1 처리)
 // P>I → 좌측 우세 기본 (-1 처리)
-const CONSERVATIVE_BIAS = { SO: 1, AC: 1, HE: 1, PI: -1 };
+const CONSERVATIVE_BIAS = { SO: -1, AC: -1, HE: -1, PI: 1 };
 
 function getRecordId() {
   return new URLSearchParams(window.location.search).get('recordId');
@@ -411,13 +411,20 @@ function getBadge(absScore) {
 // score: 원본 점수, bias: 0일 때 보정값
 // leftLabel/rightLabel: 예) '직관형 (S)' / '데이터형 (O)'
 function renderAxis(container, eyebrow, axisName, leftLabel, rightLabel, score, bias, desc) {
-  // 보수 척도 반영: score=0이면 bias 적용
-  const adjScore = (score === 0) ? bias : score;
-
-  // 좌측 퍼센트 계산 (범위 -32~+32)
-  let lPct = Math.round((32 - adjScore) / 64 * 100);
-  lPct = Math.max(1, Math.min(99, lPct)); // 0%/100% 방지
-  const rPct = 100 - lPct;
+  // score > 0 → 좌측(S/A/H/P) 우세
+  // score < 0 → 우측(O/C/E/I) 우세
+  // score = 0 → 보수 척도 적용 (49:51 고정)
+  let lPct, rPct;
+  if (score === 0) {
+    // 보수 척도: bias > 0이면 좌측 우세(51%), bias < 0이면 우측 우세(51%)
+    lPct = (bias > 0) ? 51 : 49;
+    rPct = 100 - lPct;
+  } else {
+    // score 범위 -32~+32, score>0이면 좌측 우세
+    lPct = Math.round((32 + score) / 64 * 100);
+    lPct = Math.max(1, Math.min(99, lPct));
+    rPct = 100 - lPct;
+  }
 
   const badge = getBadge(Math.abs(score));
 
