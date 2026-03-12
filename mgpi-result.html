@@ -266,11 +266,53 @@
   .cta-btn:hover { background: #e8c84a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.25); }
   .cta-sub { margin-top: 1rem; font-size: 0.75rem; color: rgba(223,223,222,0.3); }
 
+  /* ── 피드백 ── */
+  .feedback-section {
+    margin: 2.5rem 0 0;
+    padding: 1.75rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    text-align: center;
+  }
+  .feedback-label {
+    font-size: 0.88rem; font-weight: 500;
+    color: rgba(223,223,222,0.7); margin-bottom: 1.25rem;
+  }
+  .feedback-buttons {
+    display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+  }
+  .feedback-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--card-border);
+    border-radius: 3px; padding: 0.65rem 1rem;
+    color: rgba(223,223,222,0.7);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.8rem; cursor: pointer;
+    transition: all 0.2s ease; white-space: nowrap;
+  }
+  .feedback-btn:hover {
+    border-color: var(--gold-border);
+    color: var(--text);
+    background: var(--gold-dim);
+  }
+  .feedback-btn.selected {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold); font-weight: 700;
+  }
+  .feedback-done {
+    font-size: 0.85rem; color: var(--gold);
+    margin-top: 0.75rem; display: none;
+  }
+
   @media (max-width: 480px) {
     .type-code { font-size: 2.4rem; }
     .swot-grid { grid-template-columns: 1fr; }
     #content { padding: 1.5rem 1rem 3rem; }
     .bar-side { min-width: 52px; }
+    .feedback-buttons { gap: 0.4rem; }
+    .feedback-btn { font-size: 0.75rem; padding: 0.55rem 0.75rem; }
   }
 </style>
 </head>
@@ -361,14 +403,19 @@
       <div class="expert-detail" id="expertDetail"></div>
     </div>
   </div>
-<!-- 캡처 안내 -->
-<div style="background:rgba(239,104,104,0.1);border:1px solid rgba(239,104,104,0.4);border-radius:4px;padding:1rem 1.25rem;margin-bottom:2rem;display:flex;align-items:center;gap:0.75rem;">
-  <span style="font-size:1.3rem;">📸</span>
-  <div>
-    <div style="font-size:0.82rem;font-weight:700;color:#EF6868;margin-bottom:0.25rem;">이 페이지는 1회성 링크입니다</div>
-    <div style="font-size:0.8rem;color:rgba(223,223,222,0.65);">향후 외모 관리 지표로 활용하실 분은 지금 바로 화면을 캡처해 저장해두세요 📸</div>
+
+  <!-- 피드백 -->
+  <div class="feedback-section">
+    <p class="feedback-label">이 결과가 나의 실제 성향과 얼마나 비슷한가요?</p>
+    <div class="feedback-buttons">
+      <button class="feedback-btn" onclick="submitFeedback(1, this)">😮 신기하게 맞다</button>
+      <button class="feedback-btn" onclick="submitFeedback(2, this)">🙂 어느 정도 맞다</button>
+      <button class="feedback-btn" onclick="submitFeedback(3, this)">😐 대부분 다르다</button>
+      <button class="feedback-btn" onclick="submitFeedback(4, this)">😑 전혀 안 맞다</button>
+    </div>
+    <p class="feedback-done" id="feedbackDone">✓ 평가해주셔서 감사합니다</p>
   </div>
-</div>
+
   <!-- CTA -->
   <div class="cta-section">
     <p class="cta-label" id="ctaLabel">👇 내 성향에 맞는 외모 개선 방법이 궁금하면? 👇</p>
@@ -384,7 +431,7 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsayHxIajM75sE
 // 보수 척도 기본값 (점수=0 일 때 적용)
 // S<O, A<C, H<E → 우측 우세 기본 (+1 처리)
 // P>I → 좌측 우세 기본 (-1 처리)
-const CONSERVATIVE_BIAS = { SO: -1, AC: -1, HE: -1, PI: 1 };
+const CONSERVATIVE_BIAS = { SO: 1, AC: 1, HE: 1, PI: -1 };
 
 function getRecordId() {
   return new URLSearchParams(window.location.search).get('recordId');
@@ -570,7 +617,28 @@ async function loadResult() {
   }
 }
 
-loadResult();
+async function submitFeedback(rating, btnEl) {
+  // 중복 클릭 방지
+  const btns = document.querySelectorAll('.feedback-btn');
+  btns.forEach(b => { b.disabled = true; b.classList.remove('selected'); });
+  btnEl.classList.add('selected');
+
+  const recordId = getRecordId();
+  if (!recordId) return;
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ recordId: recordId, rating: rating })
+    });
+  } catch(e) {
+    console.error('feedback error:', e);
+  }
+
+  document.getElementById('feedbackDone').style.display = 'block';
+}
+
 </script>
 </body>
 </html>
